@@ -44,7 +44,7 @@ var can=parseInt(cantidad.value)
     }
     if(tres.checked){
       aumento+=75;
-    }git
+    }
 
     if (d.checked){
       cost=20;
