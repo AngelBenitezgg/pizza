@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Salario</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .titulo {
+      background-color: #f8f9fa;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .boton-reset {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .cabecera-tabla {
+      background-color: #343a40;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body onload="mostrarResultados()">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col">
+        <h2 class="titulo mb-4">Calculadora de Salario</h2>
+        <form>
+          <div class="form-group">
+            <label for="tipoEmpleado">Tipo de Empleado:</label>
+            <select class="form-control" id="tipoEmpleado">
+              <option value="gerente">Gerente</option>
+              <option value="jefe">Jefe</option>
+              <option value="cajero">Cajero</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="horasTrabajadas">Horas Trabajadas:</label>
+            <input type="range" class="form-control-range" id="horasTrabajadas" value="0" min="0" max="60" step="1">
+            <span id="horasTrabajadasValor">0</span> horas
+          </div>
+          <div class="form-group">
+            <label for="antiguedad">Antigüedad en la Empresa:</label>
+            <input type="range" class="form-control-range" id="antiguedad" value="0" min="0" max="30" step="1">
+            <span id="antiguedadValor">0</span> años
+          </div>
+          <button type="reset" class="btn boton-reset">Limpiar</button>
+        </form>
+        <hr>
+        <div class="resultados" style="display: none;">
+          <h4 class="titulo">Percepciones</h4>
+          <table class="table table-striped">
+            <thead class="cabecera-tabla">
+              <tr>
+                <th>Concepto</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sueldo Base</td>
+                <td id="sueldoBase">$0.00</td>
+              </tr>
+              <tr>
+                <td>Canasta Básica (4.5%)</td>
+                <td id="canastaBasica">$0.00</td>
+              </tr>
+              <tr>
+                <td>Estímulo (2%)</td>
+                <td id="estimulo">$0.00</td>
+              </tr>
+              <tr>
+                <td>Antigüedad</td>
+                <td id="antiguedadMonto">$0.00</td>
+              </tr>
+              <tr>
+                <td>Horas Extra</td>
+                <td id="extra">$0.00</td>
+              </tr>
+              <tr>
+                <th>Total Percepciones</th>
+                <th id="totalPercepciones">$0.00</th>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="titulo">Deducciones</h4>
+          <table class="table table-striped">
+            <thead class="cabecera-tabla">
+              <tr>
+                <th>Concepto</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ISR (16%)</td>
+                <td id="isr">$0.00</td>
+              </tr>
+              <tr>
+                <td>Servicio de Salud (4.625%)</td>
+                <td id="servicioSalud">$0.00</td>
+              </tr>
+              <tr>
+                <td>Sindicato (1%)</td>
+                <td id="sindicato">$0.00</td>
+              </tr>
+              <tr>
+                <td>Afore (6.1%)</td>
+                <td id="afore">$0.00</td>
+              </tr>
+              <tr>
+                <td>Capitalización Individual (1.4%)</td>
+                <td id="capitalizacion">$0.00</td>
+              </tr>
+              <tr>
+                <th>Total Deducciones</th>
+                <th id="totalDeducciones">$0.00</th>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="titulo">Salario Neto</h4>
+          <table class="table table-striped">
+            <thead class="cabecera-tabla">
+              <tr>
+                <th>Concepto</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Salario Neto</th>
+                <th id="salarioNeto">$0.00</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    const tipoEmpleadoSelect = document.getElementById('tipoEmpleado');
+    const horasTrabajadasSlider = document.getElementById('horasTrabajadas');
+    const horasTrabajadasValor = document.getElementById('horasTrabajadasValor');
+    const antiguedadSlider = document.getElementById('antiguedad');
+    const antiguedadValor = document.getElementById('antiguedadValor');
+    const sueldoBaseElement = document.getElementById('sueldoBase');
+    const canastaBasicaElement = document.getElementById('canastaBasica');
+    const estimuloElement = document.getElementById('estimulo');
+    const antiguedadMontoElement = document.getElementById('antiguedadMonto');
+    const extraElement = document.getElementById('extra');
+    const isrElement = document.getElementById('isr');
+    const servicioSaludElement = document.getElementById('servicioSalud');
+    const sindicatoElement = document.getElementById('sindicato');
+    const aforeElement = document.getElementById('afore');
+    const capitalizacionElement = document.getElementById('capitalizacion');
+    const salarioNetoElement = document.getElementById('salarioNeto');
+    const totalPercepcionesElement = document.getElementById('totalPercepciones');
+    const totalDeduccionesElement = document.getElementById('totalDeducciones');
+
+    tipoEmpleadoSelect.addEventListener('change', actualizarSalario);
+    horasTrabajadasSlider.addEventListener('input', actualizarSalario);
+    antiguedadSlider.addEventListener('input', actualizarSalario);
+
+    function actualizarSalario() {
+      const tipoEmpleado = tipoEmpleadoSelect.value;
+      const horasTrabajadas = parseFloat(horasTrabajadasSlider.value);
+      const antiguedad = parseFloat(antiguedadSlider.value);
+
+      let pagoPorHora;
+      switch (tipoEmpleado) {
+        case 'gerente':
+          pagoPorHora = 200;
+          break;
+        case 'jefe':
+          pagoPorHora = 150;
+          break;
+        case 'cajero':
+          pagoPorHora = 100;
+          break;
+      }
+
+      const sueldoBase = horasTrabajadas * pagoPorHora;
+      const canastaBasica = sueldoBase * 0.045;
+      const estimulo = sueldoBase * 0.02;
+      const antiguedadMonto = antiguedad * 200;
+      const horasExtra = horasTrabajadas > 40 ? (horasTrabajadas - 40) * pagoPorHora * 3 : 0;
+      const isr = sueldoBase * 0.16;
+      const servicioSalud = sueldoBase * 0.04625;
+      const sindicato = sueldoBase * 0.01;
+      const afore = sueldoBase * 0.061;
+      const capitalizacion = sueldoBase * 0.014;
+      const totalPercepciones = sueldoBase + canastaBasica + estimulo + antiguedadMonto + horasExtra;
+      const totalDeducciones = isr + servicioSalud + sindicato + afore + capitalizacion;
+      const salarioNeto = totalPercepciones - totalDeducciones;
+
+      sueldoBaseElement.textContent = "$" + sueldoBase.toFixed(2);
+      canastaBasicaElement.textContent = "$" + canastaBasica.toFixed(2);
+      estimuloElement.textContent = "$" + estimulo.toFixed(2);
+      antiguedadMontoElement.textContent = "$" + antiguedadMonto.toFixed(2);
+      extraElement.textContent = "$" + horasExtra.toFixed(2);
+      isrElement.textContent = "$" + isr.toFixed(2);
+      servicioSaludElement.textContent = "$" + servicioSalud.toFixed(2);
+      sindicatoElement.textContent = "$" + sindicato.toFixed(2);
+      aforeElement.textContent = "$" + afore.toFixed(2);
+      capitalizacionElement.textContent = "$" + capitalizacion.toFixed(2);
+      salarioNetoElement.textContent = "$" + salarioNeto.toFixed(2);
+      totalPercepcionesElement.textContent = "$" + totalPercepciones.toFixed(2);
+      totalDeduccionesElement.textContent = "$" + totalDeducciones.toFixed(2);
+
+      mostrarResultados();
+    }
+
+    function mostrarResultados() {
+      const resultadosDiv = document.querySelector('.resultados');
+      resultadosDiv.style.display = 'block';
+    }
+
+    const resetButton = document.querySelector('button[type="reset"]');
+    resetButton.addEventListener('click', limpiarFormulario);
+
+    function limpiarFormulario() {
+      const montoElements = document.querySelectorAll('#sueldoBase, #canastaBasica, #estimulo, #antiguedadMonto, #extra, #isr, #servicioSalud, #sindicato, #afore, #capitalizacion, #totalPercepciones, #totalDeducciones, #salarioNeto');
+      montoElements.forEach(element => {
+        element.textContent = '$0.00';
+      });
+
+      tipoEmpleadoSelect.selectedIndex = 0;
+      horasTrabajadasSlider.value = 0;
+      horasTrabajadasValor.textContent = '0';
+      antiguedadSlider.value = 0;
+      antiguedadValor.textContent = '0';
+
+      const resultadosDiv = document.querySelector('.resultados');
+      resultadosDiv.style.display = 'none';
+    }
+  </script>
+</body>
+
+</html>

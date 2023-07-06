@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <title></title>
+</head>
+
+<body onload="mostrarCategoria()">
+  <div class="container-fluid text-center m-auto">
+    <h1 class="bg-warning text-white">Registro de Categoría</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModalCategoria">Agregar categoría</button>
+    <div class="bg-dark text-white mt-2" id="listCategorias"></div>
+  </div>
+
+  <div class="modal fade" id="addModalCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Categoría</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addCategorias">
+            <h2>Categoría</h2>
+            <input type="text" id="categoria" class="from-control m-1">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success" id="agregar">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="appCategorias.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script src="sweetalert2.all.min.js"></script>
+</body>
+
+</html>

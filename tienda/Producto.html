@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Productos</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body onload="mostrarProductos();">
+<div class="container-fluid text-center m-auto">
+  <h1 class="bg-danger text-white mt-3 p-2">Productos</h1><hr>
+  <div class="card w-100 bg-warning text-white mt-2" id="listProductos">
+  </div><br />
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModalProducto">Agregar producto</button>
+      <a href="inicio.html" class="btn btn-primary">Tiendita</a>
+         
+   
+   
+   <div class="modal fade" id="addModalProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formAdd">
+           <h2>Producto</h2>
+    <input type="text" name="" id="nombre" class="form-control m-1">
+    <h2>Precio</h2>
+    <input type="text" name="" id="precio" class="form-control m-1">
+     <h2>Stock</h2>
+    <input type="text" name="" id="stock" class="form-control m-1">
+     <h2>Categoria</h2>
+     <select value="categoria" id="categoria">
+       
+     </select>
+    
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="agregar">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<script src="bootstrap.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="app.js"></script>
+</body>
+
+</html>

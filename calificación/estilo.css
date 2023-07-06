@@ -1,0 +1,15 @@
+*{
+margin: 0px;
+padding: 0px;
+}
+body{
+    text-align: center;
+    background: rgb(122,222,500);
+    background: radial-gradient(circle, rgba(150,170,500,1) 0%, rgba(20,50,122,1) 100%);
+}
+div{
+      height: 50px;
+      width: 120px;
+      
+      background-color: yellowgreen
+    }

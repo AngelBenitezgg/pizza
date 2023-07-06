@@ -1,0 +1,14 @@
+*{
+margin: 0px;
+padding: 0px;
+}
+body{
+    text-align: center;
+    background: rgb(yellow,greem,blue);
+    background: radial-gradient(circle, rgba(100,170,500,1) 0%, rgba(18,50,110,1) 100%);
+}
+button{
+      height: 30px;
+      width: 30px;
+      background-color: yellowgreen
+    }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <title>CONVERSOR DE GRADOS</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body class="bg-success">
+  
+  <center>
+  <h1 class="bg-danger text-white mt-3 p-2">CONVERSOR DE TEMPERATURA</h1><hr>
+    Cantidad: <input type="range" id="cantidad" min="0" max="100" value="0" oninput="actualizarValor(); convertir()"><span id="valor">0</span>
+    De: 
+    <select class="form-control" id="de" onchange="convertir()" class="form-control">
+      <option value="1">Fahrenheit</option>
+      <option value="2">Celsius</option>
+      <option value="3">Kelvin</option>
+    </select><br><br>
+    Convertir A:
+    <select class="form-control"  id="a" onchange="convertir()">
+      <option value="1">Fahrenheit</option>
+      <option value="2">Celsius</option>
+      <option value="3">Kelvin</option>
+      
+    </select><br><br>
+    <h1 id="grados">Grados: ⁰C</h1>
+    
+    <script src="app.js"></script>
+    <script src="bootstrap.min.js"></script>
+  </center>
+</body>
+
+</html>
