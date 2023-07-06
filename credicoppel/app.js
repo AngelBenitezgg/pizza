@@ -4,22 +4,31 @@ let vc=document.querySelector("#vcan")
 cantidad.oninput=()=>{vc.innerHTML=cantidad.value;calcular();}
 
 const calcular=()=>{
-  var precioC=document.querySelector("#precioC")
+  
     var tamaño=document.querySelector("#tamaño").value;
     var img=document.querySelector("#img");
-    var precio=document.querySelector("#precio")
+    var precio=document.querySelector("#res")
     var cantidad=document.querySelector("#cantidad")
     var precioCr=document.querySelector("#total")
     var uno=document.querySelector("#m6");
     var dos=document.querySelector("#m12");
     var tres=document.querySelector("#m18");
-    var costopizza=document.querySelector("costopizza");
-var vc=document.querySelector("#vcan")
-    var costo=0;
-    var plazo=0;
-    var aumento=0;
-    var can=parseInt(cantidad.value)
     
+    var ingrediente2=document.querySelector("#dos");
+    var ingrediente3=document.querySelector("#tres");
+
+var u=document.querySelector("#uno");
+var d=document.querySelector("#dos");
+var t=document.querySelector("#tres");
+var refresco=40;
+var papas=50;
+var alitas=40;
+var total=0;
+var aumento=0;
+var cost=0;
+var costo=0;
+
+var can=parseInt(cantidad.value)
     switch(tamaño){
         case "individual":costo=100;break;
         case "grande":costo=120;break;
@@ -35,14 +44,20 @@ var vc=document.querySelector("#vcan")
     }
     if(tres.checked){
       aumento+=75;
-    }
+    }git
 
+    if (d.checked){
+      cost=20;
+    }
+    if (t.checked){
+      cost=35;
+    }
     
-    
-    
-    var contado=costo*can;
+    var contado=(costo+cost)*can;
     var cr=contado+aumento;
+    var Total=0;
     
 precio.innerHTML=`<h3>Precio: $${cr.toFixed(2)} MXN</h3>`
-precioC.innerHTML=`<h3>Precio: $${contado.toFixed(2)} MXN</h3>`
+
+
 }

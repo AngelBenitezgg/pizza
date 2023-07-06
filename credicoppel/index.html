@@ -20,14 +20,7 @@
             <option value="familiar">Familiar</option>
             <option value="jumbo">Jumbo</option>
         </select>
-        <div class="bg-success text-white">Ingredientes</div>
-        <div class="m-2">
-            <div class="m-2 ">
-                <input type="radio" name="qe" id="uno" class="form-check-input p-2 " onchange="calcular()" checked="checked">Queso extra
-                <input type="radio" name="s" id="dos" class="form-check-input" onchange="calcular()" >Salsa
-                <input type="radio" name="p" id="tres" class="form-check-input" onchange="calcular()" >Peperonie
-                
-            </div>
+        
     
     <h1 class="bg-success text-white">Cantidad</h1>
     <input class="form-control "type="range" id="cantidad" value="0" min="1" max="10">
@@ -39,8 +32,16 @@
     <input type="checkbox" name="p" id="m12" class="form-check-input" onchange="calcular()" >Papas
     <input type="checkbox" name="a" id="m18" class="form-check-input" onchange="calcular()" >alitas
     
+    <div class="bg-success text-white">Ingredientes</div>
+        <div class="m-2">
+            <div class="m-2 ">
+                <input type="radio" name="m" id="uno" class="form-check-input p-2 " onchange="calcular()" >1 Ingrediente
+                <input type="radio" name="m" id="dos" class="form-check-input" onchange="calcular()" >2 Ingredientes
+                <input type="radio" name="m" id="tres" class="form-check-input" onchange="calcular()" >3 Ingredientes
+                
+            </div>
     </div>
-    <div class="bg-dark text-white h1 "id="precio">Precio : $ 0.00 MXN</div>
+    <div class="bg-dark text-white h1 "id="res">Precio: $ 0.00 MXN</div>
     
    </div>
     <script src="bootstrap.min.js"></script>
